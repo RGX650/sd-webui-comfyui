@@ -10,7 +10,7 @@ from lib_comfyui.comfyui import iframe_requests
 
 class AccordionInterface:
     def __init__(self, get_elem_id, tab):
-        from modules import ui
+        from modules import ui_symbols
 
         self.tab = tab
 
@@ -45,7 +45,7 @@ class AccordionInterface:
             value=True,
         )
         self.refresh_button = gr.Button(
-            value=f'{ui.refresh_symbol} Reload ComfyUI interfaces (client side)',
+            value=f'{ui_symbols.refresh} Reload ComfyUI interfaces (client side)',
             elem_id=get_elem_id('refresh_button'),
         )
 
