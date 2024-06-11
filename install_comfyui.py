@@ -6,11 +6,13 @@ default_install_location = os.path.join(os.path.dirname(os.path.realpath(__file_
 
 
 def main(install_location):
+    repo_url = 'https://github.com/comfyanonymous/ComfyUI.git'
+    install_repo(repo_url, install_location)
+
+def install_repo(git_repo_url, install_location):
     import git
-    git_repo_url = 'https://github.com/comfyanonymous/ComfyUI.git'
     os.mkdir(install_location)
     git.Repo.clone_from(git_repo_url, install_location)
-
 
 if __name__ == '__main__':
     install_location = default_install_location
