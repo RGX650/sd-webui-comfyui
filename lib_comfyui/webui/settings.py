@@ -163,6 +163,7 @@ def is_webui_server_remote():
     return any(
         bool(getattr(shared.cmd_opts, opt, False))
         for opt in (
+            "listen",
             "share",
             "ngrok",
 
@@ -173,7 +174,7 @@ def is_webui_server_remote():
             "jprq",
             "bore",
             "googleusercontent",
-            "tunnel-webhook",
+            "tunnel_webhook",
         )
     )
 
