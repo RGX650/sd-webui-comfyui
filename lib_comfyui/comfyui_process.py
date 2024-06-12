@@ -110,7 +110,7 @@ def install_comfyui_requirements(executable, comfyui_install_location, comfyui_e
             'pip',
             'install',
             '-r',
-            str(Path(settings.get_extension_base_dir(), 'ComfyUI', 'requirements.txt')),
+            'requirements.txt',
         ],
         executable=executable,
         cwd=str(comfyui_install_location),
