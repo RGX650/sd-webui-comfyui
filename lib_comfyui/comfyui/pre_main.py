@@ -16,7 +16,7 @@ def patch_sys_path():
         print("[sd-webui-comfyui]", f"Exiting...", file=sys.stderr)
         exit(1)
 
-    sys.path[:0] = (comfyui_install_dir, extension_dir)
+    sys.path[:0] = (comfyui_install_dir, extension_dir, extension_root)
 
 
 if __name__ == "__main__":
