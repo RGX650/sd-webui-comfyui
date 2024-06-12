@@ -2,10 +2,27 @@ import os
 import sys
 import importlib
 from lib_comfyui import ipc
+from pathlib import Path
 
 
 @ipc.restrict_to_process('comfyui')
 def share_webui_folder_paths():
+    from lib_comfyui import settings
+    # Retrieve the install location
+    install_location = settings.get_install_location()
+    folder_paths_module_path = Path(install_location) / 'folder_paths.py'
+
+    # Ensure the folder_paths.py file exists
+    if not folder_paths_module_path.exists():
+        raise FileNotFoundError(f"{folder_paths_module_path} does not exist")
+
+    # Dynamically load the folder_paths module
+    spec = importlib.util.spec_from_file_location("folder_paths", folder_paths_module_path)
+    folder_paths = importlib.util.module_from_spec(spec)
+    sys.modules["folder_paths"] = folder_paths
+    spec.loader.exec_module(folder_paths)
+
+    # Import add_model_folder_path from the dynamically loaded module
     from folder_paths import add_model_folder_path
     webui_folder_paths = get_webui_folder_paths()
     for folder_id, folder_paths in webui_folder_paths.items():
