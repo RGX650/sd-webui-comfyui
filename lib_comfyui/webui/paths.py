@@ -1,12 +1,13 @@
 import os
 import sys
 import importlib
-from lib_comfyui import ipc, settings
+from lib_comfyui import ipc
 from pathlib import Path
 
 
 @ipc.restrict_to_process('comfyui')
 def share_webui_folder_paths():
+    from lib_comfyui.webui import settings
     # Retrieve the install location
     install_location = settings.get_install_location()
     folder_paths_module_path = Path(install_location) / 'folder_paths.py'
