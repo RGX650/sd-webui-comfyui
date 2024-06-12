@@ -1,18 +1,23 @@
 import os
 import sys
+from lib_comfyui.webui import settings
 
 
 def patch_sys_path():
     comfyui_install_dir = os.getcwd()
     extension_dir = os.getenv("SD_WEBUI_COMFYUI_EXTENSION_DIR")
+    install_location = settings.get_install_location()
+    
     print("[comfyui_install_dir]", f"install_dir={comfyui_install_dir}")
     print("[extension_dir]", f"extension_dir={extension_dir}")
+    print("[install_location]", f"install_location={install_location}")
+    
     if not comfyui_install_dir or not extension_dir:
         print("[sd-webui-comfyui]", f"Could not add new entries to sys.path. install_dir={comfyui_install_dir}, extension_dir={extension_dir}, sys.path={sys.path}", file=sys.stderr)
         print("[sd-webui-comfyui]", f"Exiting...", file=sys.stderr)
         exit(1)
 
-    sys.path[:0] = (comfyui_install_dir, extension_dir)
+    sys.path[:0] = (comfyui_install_dir, extension_dir, install_location)
 
 
 if __name__ == "__main__":
